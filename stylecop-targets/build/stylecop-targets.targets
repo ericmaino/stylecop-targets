@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <StyleCopVersion>4.7</StyleCopVersion>
+    <StyleCopToolsRoot>StyleCop\$(StyleCopVersion)</StyleCopToolsRoot>
+    <StyleCopSettingsFileName>Settings.StyleCop</StyleCopSettingsFileName>
+  </PropertyGroup>
+
+  <Import Project="$(StyleCopToolsRoot)\StyleCop.Targets"/>
+
+  <PropertyGroup>
+    <BuildDependsOn>LocateStyleCopSettings;$(BuildDependsOn)</BuildDependsOn>
+  </PropertyGroup>
+
+  <Target Name="LocateStyleCopSettings" BeforeTargets="StyleCop"
+          Condition="'$(StyleCopOverrideSettingsFile)' == '' Or '$(StyleCopOverrideSettingsFile)' == ' '">
+
+    <PropertyGroup>
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
+      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(StyleCopParent)' != ''">
+      <StyleCopOverrideSettingsFile>$(StyleCopCandidate)</StyleCopOverrideSettingsFile>
+    </PropertyGroup>
+  </Target>
+
+
+</Project>
