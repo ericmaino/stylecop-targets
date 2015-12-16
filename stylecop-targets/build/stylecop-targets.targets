@@ -4,9 +4,15 @@
     <StyleCopVersion>4.7</StyleCopVersion>
     <StyleCopToolsRoot>StyleCop\$(StyleCopVersion)</StyleCopToolsRoot>
     <StyleCopSettingsFileName>Settings.StyleCop</StyleCopSettingsFileName>
+    <StyleCopTreatWarningsAsErrors Condition="'$(StyleCopTreatWarningsAsErrors)' == ''">false</StyleCopTreatWarningsAsErrors>
   </PropertyGroup>
 
   <Import Project="$(StyleCopToolsRoot)\StyleCop.Targets"/>
+
+  <PropertyGroup Condition="'$(StyleCopTreatWarningsAsErrors)' == 'false'">
+    <StyleCopTreatErrorsAsWarnings>true</StyleCopTreatErrorsAsWarnings>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+  </PropertyGroup>
 
   <PropertyGroup>
     <BuildDependsOn>LocateStyleCopSettings;$(BuildDependsOn)</BuildDependsOn>
