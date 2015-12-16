@@ -20,32 +20,32 @@
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
 
-    <PropertyGroup Condition="!Exists('$(StyleCopCandidate)')">
+    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
       <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
       <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
     </PropertyGroup>
