@@ -7,12 +7,20 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildDependsOn>LocateCodeAnalysisSettings;$(BuildDependsOn);</BuildDependsOn>
+    <BuildDependsOn>GenerateCodeAnalysisRuleSet;$(BuildDependsOn);</BuildDependsOn>
+    <GeneratedCodeAnalysisRuleSet>$(IntermediateOutputPath)Generated.CodeAnalyis.Ruleset</GeneratedCodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(GeneratedCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <Target Name="LocateCodeAnalysisSettings" BeforeTargets="ResolveCodeAnalysisRuleSet" Condition="'$(DefaultCodeAnalysisRuleSet)' == ''">
+  <Target Name="GenerateCodeAnalysisRuleSet" AfterTargets="LocateCodeAnalysisSettings" Inputs="$(CodeAnalysisRuleSetCandidate)" Outputs="$(GeneratedCodeAnalysisRuleSet)">
+    <Copy SourceFiles="$(CodeAnalysisRuleSetCandidate)" DestinationFiles="$(GeneratedCodeAnalysisRuleSet)" OverwriteReadOnlyFiles="true" >
+      <Output ItemName="FileWrites" TaskParameter="CopiedFiles"/>
+    </Copy>
+  </Target>
+
+  <Target Name="LocateCodeAnalysisSettings" BeforeTargets="ResolveCodeAnalysisRuleSet">
     <LocateCodeAnalysisCandidate RootDirectory="$(MSBuildProjectDirectory)">
-      <Output TaskParameter="RuleSetCandidate" PropertyName="CodeAnalysisRuleSet" />
+      <Output TaskParameter="RuleSetCandidate" PropertyName="CodeAnalysisRuleSetCandidate" />
     </LocateCodeAnalysisCandidate>
   </Target>
 
