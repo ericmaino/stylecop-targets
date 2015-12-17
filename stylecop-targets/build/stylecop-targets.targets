@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BuildDependsOn>GenerateCodeAnalysisRuleSet;$(BuildDependsOn);</BuildDependsOn>
+    <GeneratedCodeAnalysisRuleSet>$(IntermediateOutputPath)Generated.CodeAnalyis.Ruleset</GeneratedCodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(GeneratedCodeAnalysisRuleSet)</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <Target Name="GenerateCodeAnalysisRuleSet" AfterTargets="LocateCodeAnalysisSettings" Inputs="$(CodeAnalysisRuleSetCandidate)" Outputs="$(GeneratedCodeAnalysisRuleSet)">
+    <Copy SourceFiles="$(CodeAnalysisRuleSetCandidate)" DestinationFiles="$(GeneratedCodeAnalysisRuleSet)" OverwriteReadOnlyFiles="true" >
+      <Output ItemName="FileWrites" TaskParameter="CopiedFiles"/>
+    </Copy>
+  </Target>
+
+  <Target Name="LocateCodeAnalysisSettings" BeforeTargets="ResolveCodeAnalysisRuleSet">
+    <LocateCodeAnalysisCandidate RootDirectory="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="RuleSetCandidate" PropertyName="CodeAnalysisRuleSetCandidate" />
+    </LocateCodeAnalysisCandidate>
+  </Target>
+
+  <Import Project="Tasks\LocateCodeAnalysisRuleSet.task.targets"/>
+</Project>
