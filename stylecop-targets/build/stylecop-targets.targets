@@ -1,65 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
-    <StyleCopVersion>4.7</StyleCopVersion>
-    <StyleCopToolsRoot>StyleCop\$(StyleCopVersion)</StyleCopToolsRoot>
-    <StyleCopSettingsFileName>Settings.StyleCop</StyleCopSettingsFileName>
-    <StyleCopTreatWarningsAsErrors Condition="'$(StyleCopTreatWarningsAsErrors)' == ''">false</StyleCopTreatWarningsAsErrors>
-  </PropertyGroup>
-
-  <Import Project="$(StyleCopToolsRoot)\StyleCop.Targets"/>
-
-  <PropertyGroup Condition="'$(StyleCopTreatWarningsAsErrors)' == 'false'">
-    <StyleCopTreatErrorsAsWarnings>true</StyleCopTreatErrorsAsWarnings>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildDependsOn>LocateStyleCopSettings;$(BuildDependsOn)</BuildDependsOn>
+    <BuildDependsOn>LocateCodeAnalysisSettings;$(BuildDependsOn);</BuildDependsOn>
   </PropertyGroup>
 
-  <Target Name="LocateStyleCopSettings" BeforeTargets="StyleCop"
-          Condition="'$(StyleCopOverrideSettingsFile)' == '' Or '$(StyleCopOverrideSettingsFile)' == ' '">
-
-    <PropertyGroup>
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != '' And !Exists('$(StyleCopCandidate)')">
-      <StyleCopParent>$([System.IO.Path]::GetDirectoryName($(StyleCopParent)))</StyleCopParent>
-      <StyleCopCandidate>$(StyleCopParent)\$(StyleCopSettingsFileName)</StyleCopCandidate>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(StyleCopParent)' != ''">
-      <StyleCopOverrideSettingsFile>$(StyleCopCandidate)</StyleCopOverrideSettingsFile>
-    </PropertyGroup>
+  <Target Name="LocateCodeAnalysisSettings" BeforeTargets="ResolveCodeAnalysisRuleSet" Condition="'$(DefaultCodeAnalysisRuleSet)' == ''">
+    <LocateCodeAnalysisCandidate RootDirectory="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="RuleSetCandidate" PropertyName="CodeAnalysisRuleSet" />
+    </LocateCodeAnalysisCandidate>
   </Target>
 
-
+  <Import Project="Tasks\LocateCodeAnalysisRuleSet.task.targets"/>
 </Project>

@@ -2,16 +2,19 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>stylecop-targets</id>
-    <version>4.7.0.2</version>
-    <title>Style Cop MSBuild Targets</title>
+    <version>6.0.0.1-rc1</version>
+    <title>Style Cop Analyzers</title>
     <authors>MeetEric.NET</authors>
     <owners>MeetEric.NET</owners>
     <licenseUrl>https://raw.githubusercontent.com/ericmaino/stylecop-targets/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ericmaino/stylecop-targets</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A package that enables style cop for the project. It will walk the tree looking for the first settings.stylecop file</description>
+    <description>A package that enables style cop analysers for the project. This package enables code analysis and searching for a common config.</description>
     <releaseNotes />
     <copyright>Copyright © MeetEric.NET. All Rights Reserved.</copyright>
     <tags>MSBuild StyleCop Style Cop CodeAnalysis</tags>
+    <dependencies>
+      <dependency id="StyleCop.Analyzers" version="1.0.0-rc1" />
+    </dependencies>
   </metadata>
 </package>
